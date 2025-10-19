@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Our World</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+/* ---------------- General ---------------- */
+body {
+  /* ---------------- General ---------------- */
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100vw; /* Prevent anything from exceeding screen width */
+  overflow-x: hidden; /* Stop horizontal scroll completely */
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  color: #333;
+  background-color: #f7f3f9;
+
+
+}
+
+/* ---------------- Fireworks Canvas ---------------- */
+#fireworks {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ---------------- Popup ---------------- */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none;
+}
+
+.popup.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.popup-content {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px 40px;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 1.3rem;
+  color: #6a0dad;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.9);
+  max-width: 80%;
+  position: relative;
+  font-family: 'Dancing Script', cursive;
+}
+
+/* Close button */
+.popup .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 3.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #6a0dad;
+  display: none; /* Initially hidden */
+}
+
+/* Countdown fancy styling */
+#countdown {
+  font-weight: bold;
+  color: red;
+  display: inline-block;
+  animation: pulse 1s infinite, blink 1s infinite;
+  margin-top: 15px;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.4; }
+}
+
+/* ---------------- Page Content ---------------- */
+.page-content {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: 1;
+  position: relative;
+}
+
+.page-content.show {
+  opacity: 1;
+}
+
+/* ---------------- Header ---------------- */
+header {
+ 
+  width: 100vw; /* full width of viewport */
+  background-color: #b57edc;
+  color:#6f1dbb ;
+  padding: 10px 20px;
+  border-radius: 0 0 30px 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+}
+
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin: 5px 0;
+  letter-spacing: 1px;
+}
+
+h2 {
+  font-size: 1.2rem;
+  color: #6f1dbb;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* ---------------- Background Section ---------------- */
+.bg-section {
+  position: relative;
+  min-height: 100vh;
+  padding-top: 60px;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("bg1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(4px);
+  z-index: -1;
+}
+
+/* ---------------- Tabs ---------------- */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.tab {
+  background-color: rgba(230, 208, 255, 0.9);
+  color: #4b0082;
+  padding: 20px 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: 0.3s;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.tab:hover {
+  transform: scale(1.1);
+  background-color: #caa3ff;
+  color: white;
+}
+
+/* ---------------- Image Box ---------------- */
+.image-box {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+  padding-right: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.image-box img {
+  max-width: 280px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.image-box img:hover {
+  transform: scale(1.05);
+}
+
+/* ---------------- Text Area ---------------- */
+.text-area {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 30px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.text-area p {
+  max-width: 700px;
+  font-size: 1rem;
+  color: white;
+  font-weight: 550;
+  text-align: left;
+  line-height: 1.38;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 10px 15px;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------------- Running Text ---------------- */
+.running-text {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  color: #6f1dbb;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 10px 0;
+  margin-top: 10px;
+  text-shadow: 0 0 2px #b57edc, 0 0 5px #b57edc;
+  animation: scrollText 15s linear infinite;
+}
+
+@keyframes scrollText {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ---------------- Footer ---------------- */
+footer {
+  background-color: #6f1dbb;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  border-radius: 15px 15px 0 0;
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 768px) {
+  .tabs { gap: 20px; }
+  .image-box { justify-content: center; padding-right: 0; margin-top: 30px; }
+  .image-box img { max-width: 300px; }
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Fireworks canvas -->
+<canvas id="fireworks"></canvas>
+
+<!-- Popup -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <span class="close-btn" id="closePopup">&times;</span>
+    <p>✨ Happy Diwali My Bacchhaa ✨</p>
+    <p>My sweet Betuuuuuu, my adorable Duggu, and my cutest Toko 💖</p>
+    <p>Just like the diyas light up the night, you light up my world with your smile.</p>
+    <p>This Diwali, I’m just wishing to see your happiness glowing brighter than a thousand diyas.</p>
+    <p>May this festival bring endless love, laughter, and warmth to your heart, and may I get to be the reason behind that smile every single day 💫</p>
+    <p>Happy Diwali, Mere Patakha 🪔✨</p>
+    <p>With all my love,<br>💝 Yours always</p>
+    <p>✖ appears in..<span id="countdown">12</span> seconds...</p>
+  </div>
+</div>
+
+<!-- Main Page -->
+<div class="page-content" id="page">
+  <header>
+    <h1>Welcome to Toko & Koko’s World 🌸💗</h1>
+    <h2>Let’s explore together the little chambers of my heart 🫶</h2>
+    <div class="running-text">Happy Diwali to U Betuuu & your family ❤💫</div>
+  </header>
+
+  <div class="bg-section">
+    <div class="tabs">
+      <div class="tab" onclick="window.location.href='feelings.html'" style="cursor: pointer;">My Feelings</div>
+
+      <div class="tab" onclick="window.location.href='index3.html'" style="cursor: pointer;">My Therapy</div>
+      <div class="tab" onclick="window.location.href='test.html'" style="cursor: pointer;">My Diary</div>
+     
+    </div>
+
+    <div class="image-box">
+      <img src="Right-image.jpg" alt="Right Side Image" />
+      <img src="RG1.jpg" alt="Right Side Image 2" />
+    </div>
+
+    <div class="text-area">
+       <p>
+        <strong>Tanya,</strong><br>
+        It’s not about being overly drawn to you. It’s the realm of love I’ve found myself in with you,a feeling so pure, so consuming, that it may look like attachment… but in truth, this is what love really looks like.<br><br>
+        I can’t bear the thought of seeing tears in your eyes, can’t stand to see you stuck in pain.The smallest moments with you when you say “Ayush, this happened,” or when you let me be part of your little opinions those moments light me up.<br><br>
+        The two images above… they hold two different time zones of my heart.<br><br>
+        The first, our last meeting on campus I still struggle to put into words what I felt that day. Deep down, I knew it might be the last time I’d see you there… the last hug, the last random talk that meant the world to me. Those two morning hours..I wished they could stretch into forever.<br>
+        All I wanted was to hold you a little longer, to let something magical happen…for the world to just pause and let it be us in that stillness.Saying goodbye to you that day wasn’t easy. Honestly, it broke something inside me.<br>
+        When Navya was leaving, I was there just hoping and hoping you’d come to meet her. Even if just for a moment..just to see you once more. A tough moment that made me cry and left me in hope that we will see each other again.<br><br>
+        The second picture… a completely different world. God, your smile, your laugh..it’s breathtaking. It steals every breath of mine. In that moment, as you were getting clicked, all I could think was… how could I not fall in love with you?<br><br>
+        You’re everything a heart could ever wish for.<br>
+        If life ever blesses me enough to call you mine, I swear I’ll be the luckiest soul alive.<br>
+        All I ask from God is just one thing..to let my lady luck stay with me… to let <strong>you</strong> stay with me. ❤️
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    I love doing little things for you and will always continue to do so❤️
+  </footer>
+</div>
+
+<audio id="bgMusic" autoplay loop>
+  <source src="arko-song.mp3" type="audio/mpeg">
+</audio>
+
+<script src="fireworks.js"></script>
+
+<script>
+// 🎵 Elements
+const popup = document.getElementById('popup');
+const page = document.getElementById('page');
+const closePopup = document.getElementById('closePopup');
+const countdownEl = document.getElementById('countdown');
+const bgMusic = document.getElementById('bgMusic');
+
+// Set soft background volume
+bgMusic.volume = 0.35;
+
+// Check if popup was already shown
+
+if (!sessionStorage.getItem('popupShown')) {
+  // 🎆 Show fireworks for 4 seconds before popup
+  setTimeout(() => {
+    popup.classList.add('show');
+
+    let countdown = 12;
+    countdownEl.textContent = countdown;
+    closePopup.style.display = "none";
+
+    const timer = setInterval(() => {
+      countdown--;
+      countdownEl.textContent = countdown;
+
+      if (countdown <= 0) {
+        clearInterval(timer);
+        closePopup.style.display = "block";
+        countdownEl.style.display = "none";
+      }
+    }, 1000);
+
+  }, 4000); // <-- delay popup for 4 seconds to show fireworks first
+
+  closePopup.addEventListener('click', () => {
+    popup.classList.remove('show');
+    page.classList.add('show');
+    sessionStorage.setItem('popupShown', 'true'); // Remember popup shown
+    playMusic();
+  });
+} else {
+  // Skip popup if already shown
+  popup.style.display = "none";
+  page.classList.add('show');
+  playMusic();
+}
+
+// 🎶 Function to start music (only if not already playing)
+function playMusic() {
+  const savedTime = localStorage.getItem('musicTime');
+  if (savedTime) {
+    bgMusic.currentTime = parseFloat(savedTime);
+  }
+  bgMusic.play();
+
+  // Keep updating current time so music resumes smoothly
+  setInterval(() => {
+    localStorage.setItem('musicTime', bgMusic.currentTime);
+  }, 1000);
+}
+
+// Mobile auto play fix
+document.body.addEventListener('click', () => {
+  if (bgMusic.paused) {
+    playMusic();
+  }
+});
+</script>
+
+
+
+
+</body>
+</html>

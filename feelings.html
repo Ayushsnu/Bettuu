@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Feelings — For Tanya 💖</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      overflow-x: hidden;
+      text-align: center;
+      position: relative;
+    }
+
+    /* Fixed background image */
+    body::before {
+      content: "";
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: url('your-background.jpg') no-repeat center center/cover;
+      filter: blur(4px) brightness(0.7);
+      z-index: -1;
+    }
+
+    /* 💖 Falling Hearts */
+    .heart {
+      position: fixed;
+      top: -10px;
+      color: pink;
+      font-size: 24px;
+      animation: fall linear;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* 💫 Header Section */
+    .header {
+      text-align: center;
+      padding: 12px 8px;
+      z-index: 2;
+      position: relative;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      backdrop-filter: blur(6px);
+      border-bottom: 2px solid lavender;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      opacity: 0; /* hidden until popup closes */
+      transition: opacity 0.5s ease;
+    }
+
+    .header h1 { font-size: 2.5rem; color: white; margin-bottom: 5px; }
+    .header p { font-size: 2rem; color: white; font-weight: 500; margin: 0; }
+
+    /* 🌷 Grid Section */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      max-width: 1000px;
+      margin: 40px auto;
+      z-index: 2;
+      position: relative;
+      padding: 0 20px;
+      opacity: 0; /* hidden until popup closes */
+      transition: opacity 0.5s ease;
+    }
+
+    .box {
+      border: 2px solid lavender;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      backdrop-filter: blur(3px);
+      background: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 10px rgba(230, 200, 255, 0.3);
+      transition: transform 0.3s;
+    }
+
+    .box:hover { transform: scale(1.05); }
+    .box img { max-width: 100%; border-radius: 10px; border: 2px solid lavender; }
+
+    /* 🌙 Footer Section */
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 1.5rem;
+      color: #d8b9ff;
+      background: rgba(0, 0, 0, 0.6);
+      border-top: 2px solid lavender;
+      backdrop-filter: blur(6px);
+      opacity: 0; /* hidden until popup closes */
+      transition: opacity 0.5s ease;
+    }
+
+    /* 🌸 Responsive for Mobile */
+    @media (max-width: 768px) {
+      .grid { grid-template-columns: 1fr; }
+      .header h1 { font-size: 2rem; }
+      .header p { font-size: 1.5rem; }
+    }
+
+    /* Welcome popup */
+    #popup-overlay {
+      position: fixed;
+      top:0; left:0;
+      width:100vw; height:100vh;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+    }
+
+    #welcome-popup {
+      background: rgba(0,0,0,0.85);
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      max-width: 500px;
+      width: 80%;
+      color: #fff;
+      box-shadow: 0 0 50px rgba(0,0,0,0.7);
+    }
+
+    #welcome-popup h1 { font-size: 28px; margin-bottom: 20px; color: #c79aff; font-weight: 700; }
+    #welcome-popup p { font-size: 18px; margin-bottom: 30px; line-height: 1.5; color: #e0c7ff; }
+
+    #close-popup {
+      background-color: #b47bff;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    #close-popup:hover { background-color: #8f3fff; }
+
+    audio { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- 🎵 Audio -->
+  <audio id="bg-music" loop>
+    <source src="arko2.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Popup overlay -->
+  <div id="popup-overlay">
+    <div id="welcome-popup">
+      <h1>Welcome, Tanya 💖</h1>
+      <p>This page holds my heart and few chitchat.!</p>
+      <button id="close-popup">Enter</button>
+    </div>
+  </div>
+
+  <!-- 🌹 Header -->
+  <div class="header">
+    <h1>Dear Cutie Tanya ❤</h1>
+    <p>Tamatar, few words for you…</p>
+  </div>
+
+  <!-- 💕 Grid Section -->
+  <div class="grid">
+    <div class="box">
+  <p>
+    <b>My Biharan… Duggu…</b><br><br>
+    Since the day I met you, time may have passed, moments may have changed,but falling for you has only grown stronger every single day.<br><br>
+You are very <b>special</b> to me..<br><br>
+    I still remember when you lost your bottle.I prayed to Bhagwan,,Please let her bottle be found..And gracefully, I found it in the library. 
+    These are the moments when I truly felt that God listens, and there are so many more like this.<br><br>
+    Every little thing about you captivates me..seeing you giggle, watching you laugh, 
+    the cute way you say hi, sharing your hand multiple times… all of it leaves me completely enchanted. 
+    The way you communicate with me, the way you talk with your friends, and even hearing you speak to your parents on the phone.I loved every part of you.<br><br>
+    I never knew falling for someone could be this beautiful. All I want is to see you happy, 
+    to never leave this soul alone. I want to be your backbone, your diary, your safe place.<br><br>
+    Hearing about your dreams, your aspirations for your future companies, 
+    I pray with all my heart that you reach them. You have the potential to achieve everything you desire..sometimes life only asks for patience.<br><br>
+    My intentions toward you are pure, and I want to give you everything to make every moment we share truly special. 
+    I wish that if any tear ever comes to your eyes, it is only from happiness, never from hurt or grief.<br><br>
+    You are my joy, my inspiration, and my heart. Loving you has made my life infinitely more beautiful. 💖
+  </p>
+</div>
+
+
+    <div class="box">
+      <h2>My Eyes. 😌😍</h2>
+      <img src="r10.jpg" alt="Her Pic">
+    </div>
+
+    <div class="box">
+      <h2>Me Chindi.. 😜😇</h2>
+      <img src="my-pic.jpg" alt="My Pic">
+    </div>
+
+    <div class="box">
+  <p>
+    <b>This munda from UP loves you so much...</b><br><br>
+    Before meeting you, it’s not like I was completely messed up or insensitive, 
+    but being with you made me realize that sometimes our actions, even if unintentional, 
+    can deeply hurt someone.<br>
+    With you, I’ve become more expressive. Loving and caring for you doesn’t feel like a duty,
+    it just comes naturally, from the heart.<br><br>
+    I do have this little fear sometimes ,that you might think of me as some 
+    <i>movie waala aashiq</i> or that I’ve made you the only purpose of my life. 
+    But that’s not it. I just want you to know that I have the ability to walk alongside you
+    to grow, to support, and to build a life together.<br><br>
+    I love seeing you smile, seeing you happy and I’ll always keep finding ways to bring that happiness to you.<br><br>
+    Thank you for polishing me, for making me a better version of myself. 
+    I promise I’ll never let you down or make you regret choosing me.<br><br>
+    I didn’t fall for you just because one day you looked pretty..
+    I loved you in your simplest moments, in your comfy T-shirts, 
+    in your calm and chaos, in your raw and real self.<br><br>
+    And you know what melts my heart mostly.. When you carry laptop bags on your shoulder..
+    that <i>nanha baccha</i> version of you, full of innocence and cuteness, 
+    makes me fall for you all over again.<br><br>
+    I’ll keep loving every shade of you, every smile, 
+    every small thing that makes you <b>you</b>. 💖
+  </p>
+</div>
+
+  </div>
+
+  <!-- 🌻 Footer -->
+  <footer>
+    All I hail is you… I’ll always keep you happy. 💞
+  </footer>
+
+  <script>
+    // 🎵 Music setup
+    const music = document.getElementById("bg-music");
+    music.volume = 0.35;
+
+    const savedTime = localStorage.getItem('musicTime');
+    if (savedTime) music.currentTime = parseFloat(savedTime);
+
+    // Keep saving current time
+    setInterval(() => localStorage.setItem('musicTime', music.currentTime), 1000);
+
+    // Popup controls
+    const popupOverlay = document.getElementById("popup-overlay");
+    const closeBtn = document.getElementById("close-popup");
+    const header = document.querySelector(".header");
+    const grid = document.querySelector(".grid");
+    const footer = document.querySelector("footer");
+
+    closeBtn.addEventListener("click", () => {
+      popupOverlay.style.display = "none";
+      header.style.opacity = "1";
+      grid.style.opacity = "1";
+      footer.style.opacity = "1";
+      music.play();
+    });
+
+    // Falling hearts
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '💖';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 100);
+
+    // Mobile click to start music if paused
+    document.body.addEventListener('click', () => {
+      if (music.paused) music.play();
+    });
+
+    // Save music time on page leave
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem('musicTime', music.currentTime);
+    });
+  </script>
+</body>
+</html>

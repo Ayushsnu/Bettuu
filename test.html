@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dear Tanya 💖</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      color: white;
+      overflow-x: hidden;
+      position: relative;
+      text-align: center;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 26px;
+      letter-spacing: 1px;
+      z-index: 10;
+      backdrop-filter: blur(6px);
+      opacity: 0; /* hidden initially */
+      transition: opacity 0.6s ease;
+    }
+
+    /* Fixed background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      z-index: -1;
+      filter: brightness(0.5);
+    }
+
+    /* Content section */
+    .content {
+      margin-top: 140px;
+      padding: 20px 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      opacity: 0; /* hidden initially */
+      transition: opacity 0.6s ease;
+    }
+
+    /* Images */
+    .images-portrait {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .images-portrait img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      object-fit: contain;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    /* Hover Zoom */
+    .images-portrait img:hover {
+      position: relative;
+      transform: scale(1.38);
+      z-index: 9999;
+      box-shadow: 0 0 40px rgba(0,0,0,0.9);
+    }
+
+    /* Footer (Transparent version 🌙) */
+    footer {
+      text-align: center;
+      margin: 50px 0;
+      color: white;
+      font-size: 16px;
+      background: transparent;
+      padding: 20px;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      z-index: 1;
+      opacity: 0; /* hidden initially */
+      transition: opacity 0.6s ease;
+    }
+
+    footer span {
+      display: block;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* 🌸 Welcome Popup */
+    #popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+    }
+
+    #welcome-popup {
+      background: rgba(0, 0, 0, 0.85);
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      max-width: 500px;
+      width: 80%;
+      color: #fff;
+      box-shadow: 0 0 50px rgba(0,0,0,0.7);
+    }
+
+    #welcome-popup h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #c79aff;
+      font-weight: 700;
+    }
+
+    #welcome-popup p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      line-height: 1.5;
+      color: #e0c7ff;
+    }
+
+    #close-popup {
+      background-color: #b47bff;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    #close-popup:hover {
+      background-color: #8f3fff;
+    }
+
+    audio { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- 💜 Background Music -->
+  <audio id="bgMusic" loop>
+    <source src="d.mp3.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- 💌 Welcome Popup -->
+  <div id="popup-overlay">
+    <div id="welcome-popup">
+      <h1>Welcome,Bettuuuu💖</h1>
+      <p>This little place holds my warmth, and all my emotions💫.
+For you my feelings are prayer..</p>
+      <button id="close-popup">Enter</button>
+    </div>
+  </div>
+
+  <header>Dear Tanya 💌</header>
+
+  <div class="content">
+    <div class="images-portrait">
+      <img src="p11.jpg" alt="Portrait 1">
+      <img src="p12.jpg" alt="Portrait 2">
+      <img src="p13.jpg" alt="Portrait 3">
+    </div>
+  </div>
+
+  <footer>
+    <span>From - Ayush ❤️</span>
+  </footer>
+
+  <script>
+    // 🎵 Music setup
+    const music = document.getElementById("bgMusic");
+    music.volume = 0.2;
+
+    const popupOverlay = document.getElementById("popup-overlay");
+    const closeBtn = document.getElementById("close-popup");
+    const header = document.querySelector("header");
+    const content = document.querySelector(".content");
+    const footer = document.querySelector("footer");
+
+    closeBtn.addEventListener("click", () => {
+      popupOverlay.style.display = "none";
+      header.style.opacity = "1";
+      content.style.opacity = "1";
+      footer.style.opacity = "1";
+      music.play();
+    });
+
+    // Enable music on user interaction for browsers
+    document.body.addEventListener("click", () => {
+      if (music.paused) music.play();
+    });
+  </script>
+
+</body>
+</html>
